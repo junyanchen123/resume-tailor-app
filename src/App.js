@@ -15,9 +15,11 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // In a real application, you would handle the uploaded file
-    // and JD link here. For now we just log them.
+    // and JD link here. For now we just log them and reset the form.
     console.log('Resume:', resumeFile);
     console.log('JD Link:', jdLink);
+    setResumeFile(null);
+    setJdLink('');
   };
 
   return (
@@ -33,6 +35,9 @@ function App() {
             onChange={handleResumeChange}
             className="w-full"
           />
+          {resumeFile && (
+            <p className="text-sm text-gray-600 mt-1">Selected file: {resumeFile.name}</p>
+          )}
         </div>
         <div>
           <label htmlFor="jdlink" className="block mb-1 font-medium">Paste JD Link</label>
