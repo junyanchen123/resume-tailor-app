@@ -1,7 +1,11 @@
 // src/pages/Dashboard.jsx
-import React from "react";
+import React, { useState } from "react";
+import ResumeUploader from "../components/ResumeUploader";
+import JobLinkInput from "../components/JobLinkInput";
 
 export default function Dashboard() {
+  const [jobLink, setJobLink] = useState("");
+
   return (
     <div className="min-h-screen flex">
       {/* Sidebar */}
@@ -18,12 +22,16 @@ export default function Dashboard() {
       <main className="flex-1 p-8 bg-gray-100 overflow-y-auto">
         <section id="resume" className="mb-12">
           <h3 className="text-xl font-semibold mb-2">1. Upload Your Resume</h3>
-          <div className="bg-white p-4 rounded shadow">[ResumeUploader Placeholder]</div>
+          <div className="bg-white p-4 rounded shadow">
+            <ResumeUploader />
+          </div>
         </section>
 
         <section id="job" className="mb-12">
           <h3 className="text-xl font-semibold mb-2">2. Paste Job Description Link</h3>
-          <div className="bg-white p-4 rounded shadow">[JobLinkInput Placeholder]</div>
+          <div className="bg-white p-4 rounded shadow">
+            <JobLinkInput value={jobLink} onChange={(e) => setJobLink(e.target.value)} />
+          </div>
         </section>
 
         <section id="tailor">
