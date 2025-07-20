@@ -1,68 +1,144 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# TailorGOAT ✂️🧠
 
-## Available Scripts
+An AI-powered resume tailoring tool that customizes your resume to each job posting by scraping job descriptions and intelligently matching key skills, phrases, and requirements. Built with React + Tailwind (frontend) and FastAPI + Playwright (backend).
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 📦 Tech Stack
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Frontend
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+* React (with React Router)
+* Tailwind CSS
 
-### `npm test`
+### Backend
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* FastAPI
+* Playwright (for dynamic JS scraping)
+* BeautifulSoup (for HTML parsing)
+* OpenAI (optional, for AI suggestions)
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Features
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+* Upload your base resume
+* Paste a job description URL
+* Automatically scrape the job description
+* Highlight missing keywords/skills
+* (Optional) AI-generated tailored bullet points
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🛠 Setup Instructions
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 1. Clone the Repo
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+git clone https://github.com/YOUR_USERNAME/resume-tailor-app.git
+cd resume-tailor-app
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 2. Frontend Setup (React + Tailwind)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+cd frontend
+npm install
+npm start
+```
 
-## Learn More
+### 3. Backend Setup (FastAPI + Playwright)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+playwright install
+uvicorn app.main:app --reload
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Then open: `http://localhost:8000/docs` for the backend Swagger UI.
 
-### Code Splitting
+### 4. Connect Frontend ↔ Backend
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Make sure your frontend code calls:
 
-### Analyzing the Bundle Size
+```http
+POST http://localhost:8000/job/parse-url
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+---
 
-### Making a Progressive Web App
+## 📁 Folder Structure
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+```
+resume-tailor-app/
+├── frontend/             # React + Tailwind
+│   ├── src/
+│   │   ├── pages/        # Home and Dashboard
+│   │   ├── components/   # ResumeUploader, JobLinkInput, etc.
+│   └── index.css         # Tailwind setup
+│
+├── backend/              # FastAPI backend
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── job.py        # Scraping logic
+│   │   ├── resume.py     # Resume parsing (coming soon)
+│   │   └── tailor.py     # AI logic (coming soon)
+│   └── requirements.txt
+└── README.md
+```
 
-### Advanced Configuration
+---
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+## 🧪 Sample API Usage
 
-### Deployment
+**POST** `/job/parse-url`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+```json
+{
+  "url": "https://boards.greenhouse.io/airbnb/jobs/123456"
+}
+```
 
-### `npm run build` fails to minify
+**Response**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```json
+{
+  "job_description": "You will design, build, and maintain..."
+}
+```
+
+---
+
+## 🌐 Deployment Notes
+
+* Use Vercel or Netlify for the frontend
+* Use Render or Railway for the backend
+* If scraping fails, ensure you’re using Playwright with JS rendering and not hitting a blocked site (e.g., LinkedIn/Indeed)
+
+---
+
+## 📌 TODO
+
+* Resume keyword matcher
+* AI-based bullet point generator (via OpenAI)
+* Save multiple resume versions
+* Job application tracker
+
+---
+
+## 📄 License
+
+MIT License
+
+---
+
+## 👤 Author
+
+Created by [@junyanchen123](https://github.com/junyanchen123) — tailored for real-world job search automation.
+
+---
+
+*"Because your resume deserves to be as tailored as your suit."* 💼
